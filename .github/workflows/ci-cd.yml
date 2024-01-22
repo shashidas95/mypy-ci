@@ -41,7 +41,7 @@ jobs:
       - name: checkout to main branch
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: master
       - name: Merge changes to main branch
         run: |
           git branch
@@ -56,7 +56,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build and Deploy on main branch
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
         run: |
           docker build -t shashidas/python-fast-app:py -f Dockerfile .
           docker push shashidas/python-fast-app:py
