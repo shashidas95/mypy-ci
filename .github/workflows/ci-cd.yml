@@ -45,7 +45,9 @@ jobs:
       - name: Merge changes to main branch
         run: |
           git branch
-          git merge --no-ff origin/new-feature
+          git config --global user.email "shashidas95@gmail.com"
+          git config --global user.name "shashidas95"
+          git merge --no-ff --allow-unrelated-histories origin/new-feature
     
       - name: Login to DockerHub
         uses: docker/login-action@v2
