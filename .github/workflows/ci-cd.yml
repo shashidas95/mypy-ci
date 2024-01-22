@@ -38,11 +38,11 @@ jobs:
           pip install pytest pytest-cov
           pytest tests.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
         continue-on-error: true
-      - name: checkout to main branch
+      - name: checkout to master branch
         uses: actions/checkout@v4
         with:
-          ref: main
-      - name: Merge changes to main branch
+          ref: master
+      - name: Merge changes to master branch
         run: |
           git branch
           git merge --no-ff origin/new-feature
@@ -53,8 +53,8 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build and Deploy on main branch
-        if: github.ref == 'refs/heads/main'
+      - name: Build and Deploy on master branch
+        if: github.ref == 'refs/heads/master'
         run: |
           docker build -t shashidas/python-fast-app:py -f Dockerfile .
           docker push shashidas/python-fast-app:py
